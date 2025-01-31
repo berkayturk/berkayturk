@@ -14,10 +14,16 @@
         <div class="container">
             <div class="logo">BT Drone</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+                <li><a href="#about" data-i18n="nav.about">About</a></li>
+                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                <li class="language-selector">
+                    <select id="languageSelect" class="language-select">
+                        <option value="en">🇬🇧 English</option>
+                        <option value="tr">🇹🇷 Türkçe</option>
+                    </select>
+                </li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -30,14 +36,14 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Capturing the World from Above</h1>
-            <p>Professional drone photography and videography</p>
-            <a href="#gallery" class="cta-button">View Gallery</a>
+            <h1 data-i18n="hero.title">Capturing the World from Above</h1>
+            <p data-i18n="hero.subtitle">Professional drone photography and videography</p>
+            <a href="#gallery" class="cta-button" data-i18n="hero.cta">View Gallery</a>
         </div>
         <div class="hero-video">
-            <!-- Add your background video here -->
+            <!-- Free-to-use drone video background -->
             <video autoplay muted loop playsinline>
-                <source src="assets/hero-video.mp4" type="video/mp4">
+                <source src="https://player.vimeo.com/external/434045526.hd.mp4?s=81d9fda0874445392d1425a79f825a4721d6872d&profile_id=175" type="video/mp4">
             </video>
         </div>
     </section>
@@ -45,11 +51,11 @@
     <!-- Gallery Section -->
     <section id="gallery" class="gallery">
         <div class="container">
-            <h2>Featured Work</h2>
+            <h2 data-i18n="gallery.title">Featured Work</h2>
             <div class="gallery-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="photos">Photos</button>
-                <button class="filter-btn" data-filter="videos">Videos</button>
+                <button class="filter-btn active" data-filter="all" data-i18n="gallery.filter.all">All</button>
+                <button class="filter-btn" data-filter="photos" data-i18n="gallery.filter.photos">Photos</button>
+                <button class="filter-btn" data-filter="videos" data-i18n="gallery.filter.videos">Videos</button>
             </div>
             <div class="gallery-grid">
                 <!-- Gallery items will be dynamically loaded -->
@@ -60,7 +66,7 @@
     <!-- Social Media Feed Section -->
     <section class="social-feed">
         <div class="container">
-            <h2>Follow My Journey</h2>
+            <h2 data-i18n="social.title">Follow My Journey</h2>
             <div class="social-icons">
                 <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -76,20 +82,20 @@
     <section id="about" class="about">
         <div class="container">
             <div class="about-content">
-                <h2>About Me</h2>
-                <p>Professional drone pilot with a passion for capturing breathtaking aerial perspectives. Specializing in both photography and videography, I bring a unique view to every project.</p>
+                <h2 data-i18n="about.title">About Me</h2>
+                <p data-i18n="about.description">Professional drone pilot with a passion for capturing breathtaking aerial perspectives. Specializing in both photography and videography, I bring a unique view to every project.</p>
                 <div class="credentials">
                     <div class="credential">
                         <i class="fas fa-drone"></i>
-                        <h3>Licensed Pilot</h3>
+                        <h3 data-i18n="about.credentials.licensed">Licensed Pilot</h3>
                     </div>
                     <div class="credential">
                         <i class="fas fa-camera"></i>
-                        <h3>Professional Equipment</h3>
+                        <h3 data-i18n="about.credentials.equipment">Professional Equipment</h3>
                     </div>
                     <div class="credential">
                         <i class="fas fa-award"></i>
-                        <h3>Award Winning</h3>
+                        <h3 data-i18n="about.credentials.award">Award Winning</h3>
                     </div>
                 </div>
             </div>
@@ -99,14 +105,14 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Get in Touch</h2>
+            <h2 data-i18n="contact.title">Get in Touch</h2>
             <div class="contact-grid">
                 <div class="contact-form">
                     <form id="contactForm">
-                        <input type="text" placeholder="Name" required>
-                        <input type="email" placeholder="Email" required>
-                        <textarea placeholder="Message" required></textarea>
-                        <button type="submit" class="submit-btn">Send Message</button>
+                        <input type="text" data-i18n-placeholder="contact.form.name" placeholder="Name" required>
+                        <input type="email" data-i18n-placeholder="contact.form.email" placeholder="Email" required>
+                        <textarea data-i18n-placeholder="contact.form.message" placeholder="Message" required></textarea>
+                        <button type="submit" class="submit-btn" data-i18n="contact.form.submit">Send Message</button>
                     </form>
                 </div>
                 <div class="contact-info">
@@ -139,11 +145,12 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 BT Drone. All rights reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2024 BT Drone. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html> 

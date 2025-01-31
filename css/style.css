@@ -186,6 +186,76 @@ body {
     padding: 1rem;
 }
 
+.gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-image-container {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.gallery-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-video-container {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.gallery-video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 1.5rem;
+    color: white;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .item-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.item-overlay h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.item-overlay .credit {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
 /* Social Feed Section */
 .social-feed {
     padding: 6rem 0;
@@ -411,4 +481,41 @@ body {
 
 .fade-in {
     animation: fadeIn 1s ease forwards;
+}
+
+/* Language Selector */
+.language-selector {
+    margin-left: 1rem;
+}
+
+.language-select {
+    padding: 0.5rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    background: transparent;
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.language-select:hover {
+    border-color: var(--accent-color);
+}
+
+.language-select option {
+    background: white;
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .language-selector {
+        margin: 1rem 0;
+    }
+    
+    .language-select {
+        width: 100%;
+        text-align: center;
+    }
 } 

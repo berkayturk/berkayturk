@@ -26,11 +26,50 @@ window.addEventListener('scroll', () => {
 const filterButtons = document.querySelectorAll('.filter-btn');
 const galleryGrid = document.querySelector('.gallery-grid');
 
-// Sample gallery items (replace with your actual content)
+// Gallery items with copyright-free content
 const galleryItems = [
-    { type: 'photo', src: 'path/to/photo1.jpg', title: 'Aerial View 1' },
-    { type: 'video', src: 'path/to/video1.mp4', title: 'Drone Flight 1' },
-    // Add more items as needed
+    { 
+        type: 'photo', 
+        src: 'https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&w=800',
+        title: 'Aerial Beach View',
+        credit: 'Unsplash'
+    },
+    { 
+        type: 'photo', 
+        src: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800',
+        title: 'Mountain Range Drone Shot',
+        credit: 'Unsplash'
+    },
+    { 
+        type: 'photo', 
+        src: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=800',
+        title: 'City Aerial View',
+        credit: 'Unsplash'
+    },
+    { 
+        type: 'photo', 
+        src: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800',
+        title: 'Ocean Coastline',
+        credit: 'Unsplash'
+    },
+    { 
+        type: 'photo', 
+        src: 'https://images.unsplash.com/photo-1504387432042-8aca7c138087?auto=format&fit=crop&w=800',
+        title: 'Forest Landscape',
+        credit: 'Unsplash'
+    },
+    { 
+        type: 'video', 
+        src: 'https://player.vimeo.com/video/342333493',
+        title: 'Aerial Ocean Waves',
+        credit: 'Pexels'
+    },
+    { 
+        type: 'video', 
+        src: 'https://player.vimeo.com/video/449739950',
+        title: 'Mountain Valley Flight',
+        credit: 'Pexels'
+    }
 ];
 
 function createGalleryItem(item) {
@@ -40,16 +79,22 @@ function createGalleryItem(item) {
     
     if (item.type === 'photo') {
         element.innerHTML = `
-            <img src="${item.src}" alt="${item.title}">
-            <div class="item-overlay">
-                <h3>${item.title}</h3>
+            <div class="gallery-image-container">
+                <img src="${item.src}" alt="${item.title}" loading="lazy">
+                <div class="item-overlay">
+                    <h3>${item.title}</h3>
+                    <p class="credit">© ${item.credit}</p>
+                </div>
             </div>
         `;
     } else {
         element.innerHTML = `
-            <video src="${item.src}" controls></video>
-            <div class="item-overlay">
-                <h3>${item.title}</h3>
+            <div class="gallery-video-container">
+                <iframe src="${item.src}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                <div class="item-overlay">
+                    <h3>${item.title}</h3>
+                    <p class="credit">© ${item.credit}</p>
+                </div>
             </div>
         `;
     }
@@ -85,18 +130,80 @@ filterButtons.forEach(button => {
 // Contact form handling
 const contactForm = document.getElementById('contactForm');
 
+// Language handling
+let currentLanguage = localStorage.getItem('language') || 'en';
+
+function setLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('language', lang);
+    document.documentElement.lang = lang;
+    updateContent();
+}
+
+function updateContent() {
+    // Update text content
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        const translation = key.split('.').reduce((obj, i) => obj[i], translations[currentLanguage]);
+        if (translation) {
+            element.textContent = translation;
+        }
+    });
+
+    // Update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        const translation = key.split('.').reduce((obj, i) => obj[i], translations[currentLanguage]);
+        if (translation) {
+            element.placeholder = translation;
+        }
+    });
+
+    // Update gallery items
+    updateGalleryTitles();
+}
+
+function updateGalleryTitles() {
+    const items = document.querySelectorAll('.gallery-item');
+    items.forEach(item => {
+        const titleElement = item.querySelector('h3');
+        const creditElement = item.querySelector('.credit');
+        if (titleElement && creditElement) {
+            const type = item.dataset.type;
+            // You can add translations for gallery items if needed
+            // For now, we'll keep the original titles
+        }
+    });
+}
+
+// Initialize language
+document.addEventListener('DOMContentLoaded', () => {
+    const languageSelect = document.getElementById('languageSelect');
+    
+    // Set initial language
+    languageSelect.value = currentLanguage;
+    setLanguage(currentLanguage);
+
+    // Language change handler
+    languageSelect.addEventListener('change', (e) => {
+        setLanguage(e.target.value);
+    });
+});
+
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    // Get form data
     const formData = new FormData(contactForm);
     const data = Object.fromEntries(formData);
     
-    // Here you would typically send the data to your backend
     console.log('Form submitted:', data);
     
-    // Show success message
-    alert('Thank you for your message! We will get back to you soon.');
+    // Multilingual success message
+    const successMessage = currentLanguage === 'tr' 
+        ? 'Mesajınız için teşekkürler! En kısa sürede size geri döneceğiz.'
+        : 'Thank you for your message! We will get back to you soon.';
+    
+    alert(successMessage);
     contactForm.reset();
 });
 
